@@ -4,6 +4,7 @@ const express = require("express");
 const createError = require("http-errors");
 const path = require("path");
 const logger = require("morgan");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const { isAPI } = require("./lib/utils");
@@ -35,6 +36,13 @@ app.use(express.static(path.join(__dirname, "public")));
 /**
  * Website routes
  */
+app.use(
+  session({
+    name: "cookie-node",
+    secret: "a79d87as9hgfjhgj40804hnjfffbnnl",
+    saveUninit,
+  })
+);
 app.use("/", require("./routes/index"));
 app.use("/anuncios", require("./routes/anuncios"));
 app.get("/login", loginController.index);
