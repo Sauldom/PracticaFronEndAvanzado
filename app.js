@@ -50,6 +50,7 @@ app.use(
 app.use("/", require("./routes/index"));
 app.use("/anuncios", require("./routes/anuncios"));
 app.get("/login", loginController.index);
+app.post("/login", loginController.post);
 
 /**
  * API v1 routes
