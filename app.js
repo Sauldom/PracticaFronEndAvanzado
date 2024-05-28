@@ -38,9 +38,13 @@ app.use(express.static(path.join(__dirname, "public")));
  */
 app.use(
   session({
-    name: "cookie-node",
+    name: "cookie-nodeSession",
     secret: "a79d87as9hgfjhgj40804hnjfffbnnl",
-    saveUninit,
+    saveUninitialized: true,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 3,
+    },
   })
 );
 app.use("/", require("./routes/index"));
