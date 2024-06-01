@@ -16,7 +16,11 @@ class LoginController {
         res.locals.error = "Invalid credentials";
         res.locals.email = email;
         res.render("login");
+        return;
       }
+      req.session.userId = user._id;
+
+      res.redirect("/anuncios");
     } catch (error) {
       next(error);
     }

@@ -10,6 +10,8 @@ const bodyParser = require("body-parser");
 const { isAPI } = require("./lib/utils");
 require("./models"); // Connect DB & register models
 const LoginController = require("./controllers/LoginController");
+const privateController = require("./controllers/PrivatePageController");
+const anunciosRouter = require("./routes/anuncios");
 
 const app = express();
 const loginController = new LoginController();
@@ -48,9 +50,10 @@ app.use(
   })
 );
 app.use("/", require("./routes/index"));
-app.use("/anuncios", require("./routes/anuncios"));
+//app.use("/anuncios", require("./routes/anuncios"));
 app.get("/login", loginController.index);
 app.post("/login", loginController.post);
+app.use("/anuncios", privateController.index, anunciosRouter);
 
 /**
  * API v1 routes

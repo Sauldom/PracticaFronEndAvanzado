@@ -1,0 +1,67 @@
+.navbar {
+  background-color: #343a40;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.navbar .navbar-brand {
+  color: #fff;
+}
+
+.navbar .navbar-brand:hover {
+  color: #d4d4d4;
+}
+
+/* Container styles */
+.container {
+  margin-top: 70px;
+}
+
+/* Table styles */
+.table {
+  margin-top: 20px;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+ul {
+  padding-left: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Back to home link */
+a {
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
