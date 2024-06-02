@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const path = require("path");
 const logger = require("morgan");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const { isAPI } = require("./lib/utils");
@@ -47,13 +48,22 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 3,
     },
+    store: MongoStore.create({
+      mongoUrl: "mongodb://localhost/nodepop",
+    }),
   })
 );
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+//de esta manera tenemos una variable session que podemos usar en las vistas
 app.use("/", require("./routes/index"));
 //app.use("/anuncios", require("./routes/anuncios"));
 app.get("/login", loginController.index);
 app.post("/login", loginController.post);
 app.use("/anuncios", privateController.index, anunciosRouter);
+app.get("/logout", loginController.logout);
 
 /**
  * API v1 routes

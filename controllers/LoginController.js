@@ -12,7 +12,7 @@ class LoginController {
       const { email, password } = req.body;
       const user = await User.findOne({ email: email });
 
-      if (!user || user.password !== password) {
+      if (!user || !(await user.comparePassword(password))) {
         res.locals.error = "Invalid credentials";
         res.locals.email = email;
         res.render("login");
@@ -24,6 +24,16 @@ class LoginController {
     } catch (error) {
       next(error);
     }
+  }
+  logout(req, res, next) {
+    req.session.regenerate((err) => {
+      if (err) {
+        next(err);
+        return;
+      }
+      console.log(req.session);
+      res.redirect("login");
+    });
   }
 }
 

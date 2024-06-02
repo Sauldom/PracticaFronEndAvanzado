@@ -42,8 +42,8 @@ async function initUsers() {
   const deleted = await User.deleteMany();
   console.log(`Borrados los usuarios ${deleted.length}`);
   const inserted = await User.insertMany([
-    { email: "admin@admin.com", password: "admin" },
-    { email: "example@user.com", password: "1234" },
+    { email: "admin@admin.com", password: await User.hashPassword("admin") },
+    { email: "user@example.com", password: await User.hashPassword("1234") },
   ]);
   console.log(`Creados los usuarios por defecto ${inserted}`);
 }
